@@ -224,6 +224,14 @@
       window.LMA_SUPABASE_URL,
       window.LMA_SUPABASE_PUBLISHABLE_KEY
     );
+    const setPasswordView = document.getElementById('setPasswordView');
+const setPasswordForm = document.getElementById('setPasswordForm');
+const passwordMessage = document.getElementById('passwordMessage');
+
+const inviteParams = new URLSearchParams(
+  window.location.hash.substring(1)
+);
+const isInviteFlow = inviteParams.get('type') === 'invite';
 
     const today = new Date();
     const todayString = [
@@ -239,6 +247,13 @@
     }
 
     async function loadDashboard(session) {
+      if (isInviteFlow) {
+  dashboard.hidden = true;
+  message.hidden = true;
+  setPasswordView.hidden = false;
+  logoutBtn.hidden = true;
+  return;
+}
       if (!session) {
         dashboard.hidden = true;
         logoutBtn.hidden = true;
@@ -369,6 +384,51 @@
         `;
       }).join('');
     }
+
+setPasswordForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const password = document.getElementById('newPassword').value;
+  const confirmation = document.getElementById('confirmPassword').value;
+  const submitButton = setPasswordForm.querySelector('button[type="submit"]');
+
+  if (password.length < 8) {
+    passwordMessage.textContent = 'Password minimal 8 karakter.';
+    return;
+  }
+
+  if (password !== confirmation) {
+    passwordMessage.textContent = 'Konfirmasi password tidak sama.';
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Menyimpan...';
+  passwordMessage.textContent = '';
+
+  const { error } = await client.auth.updateUser({
+    password: password
+  });
+
+  if (error) {
+    passwordMessage.textContent = 'Gagal menyimpan password: ' + error.message;
+    submitButton.disabled = false;
+    submitButton.textContent = 'Simpan Password';
+    return;
+  }
+
+  passwordMessage.textContent = 'Password berhasil dibuat. Membuka dashboard...';
+
+  window.history.replaceState(
+    null,
+    document.title,
+    window.location.pathname
+  );
+
+  const { data } = await client.auth.getSession();
+  setPasswordView.hidden = true;
+  await loadDashboard(data.session);
+});
 
     logoutBtn.addEventListener('click', async () => {
       await client.auth.signOut();
