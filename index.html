@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -5,165 +6,676 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#174d35">
   <title>LMA Private Class | Dashboard</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
+
+  <!-- LOGIN -->
   <section class="login-view" id="loginView">
     <form class="login-card" id="loginForm">
-      <div class="login-brand"><span class="brand-mark">L</span><div><strong>LMA</strong><small>PRIVATE CLASS</small></div></div>
+
+      <div class="login-brand">
+        <span class="brand-mark">L</span>
+        <div>
+          <strong>LMA</strong>
+          <small>PRIVATE CLASS</small>
+        </div>
+      </div>
+
       <div class="eyebrow">ADMINISTRATOR ACCESS</div>
       <h1>Selamat datang kembali</h1>
       <p>Masuk untuk mengelola bisnis LMA Private Class.</p>
+
       <label for="loginEmail">Email administrator</label>
       <input id="loginEmail" type="email" autocomplete="username" placeholder="nama@email.com" required>
+
       <label for="loginPassword">Password</label>
       <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required>
-      <button class="primary-button login-submit" type="submit">Masuk ke Dashboard</button>
+
+      <button class="primary-button login-submit" type="submit">
+        Masuk ke Dashboard
+      </button>
+
       <div class="login-message" id="loginMessage" role="status" aria-live="polite"></div>
       <small class="login-security">Akses khusus akun administrator yang terdaftar.</small>
+
     </form>
   </section>
+
+
+  <!-- APLIKASI -->
   <div class="app-shell" hidden>
+
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="index.html">
+
+      <a class="brand" href="#dashboard">
         <span class="brand-mark">L</span>
-        <span><strong>LMA</strong><small>PRIVATE CLASS</small></span>
+        <span>
+          <strong>LMA</strong>
+          <small>PRIVATE CLASS</small>
+        </span>
       </a>
+
       <div class="workspace-label">WORKSPACE</div>
+
       <nav class="nav-menu" aria-label="Navigasi utama">
-        <a class="nav-link active" href="#dashboard"><span class="nav-icon">▦</span>Dashboard</a>
+
+        <a class="nav-link active" href="#dashboard">
+          <span class="nav-icon">▦</span>Dashboard
+        </a>
+
         <div class="nav-caption">MANAJEMEN</div>
-        <a class="nav-link" href="#students"><span class="nav-icon">♙</span>Data Siswa</a>
-        <a class="nav-link" href="#tutors"><span class="nav-icon">♧</span>Data Tutor</a>
-        <a class="nav-link" href="#programs"><span class="nav-icon">▤</span>Program & Paket</a>
-        <a class="nav-link" href="#schedules"><span class="nav-icon">▦</span>Jadwal Les</a>
-        <a class="nav-link" href="#attendance"><span class="nav-icon">✓</span>Absensi</a>
-        <a class="nav-link" href="#academic"><span class="nav-icon">▱</span>Akademik</a>
+
+        <a class="nav-link" href="#students">
+          <span class="nav-icon">♙</span>Data Siswa
+        </a>
+
+        <a class="nav-link" href="#tutors">
+          <span class="nav-icon">♧</span>Data Tutor
+        </a>
+
+        <a class="nav-link" href="#programs">
+          <span class="nav-icon">▤</span>Program & Paket
+        </a>
+
+        <a class="nav-link" href="#schedules">
+          <span class="nav-icon">▦</span>Jadwal Les
+        </a>
+
+        <a class="nav-link" href="#attendance">
+          <span class="nav-icon">✓</span>Absensi
+        </a>
+
+        <a class="nav-link" href="#academic">
+          <span class="nav-icon">▱</span>Akademik
+        </a>
+
         <div class="nav-caption">KEUANGAN</div>
-        <a class="nav-link" href="#invoices"><span class="nav-icon">▧</span>Tagihan & Pembayaran</a>
-        <a class="nav-link" href="#tutor-payments"><span class="nav-icon">Rp</span>Honor Tutor</a>
-        <a class="nav-link" href="#expenses"><span class="nav-icon">↗</span>Pengeluaran</a>
+
+        <a class="nav-link" href="#invoices">
+          <span class="nav-icon">▧</span>Tagihan & Pembayaran
+        </a>
+
+        <a class="nav-link" href="#tutor-payments">
+          <span class="nav-icon">Rp</span>Honor Tutor
+        </a>
+
+        <a class="nav-link" href="#expenses">
+          <span class="nav-icon">↗</span>Pengeluaran
+        </a>
+
         <div class="nav-caption">LAINNYA</div>
-        <a class="nav-link" href="#reports"><span class="nav-icon">▥</span>Laporan</a>
-        <a class="nav-link" href="#settings"><span class="nav-icon">⚙</span>Pengaturan</a>
+
+        <a class="nav-link" href="#reports">
+          <span class="nav-icon">▥</span>Laporan
+        </a>
+
+        <a class="nav-link" href="#settings">
+          <span class="nav-icon">⚙</span>Pengaturan
+        </a>
+
       </nav>
+
       <div class="sidebar-bottom">
-        <div class="help-card"><span class="help-icon">✦</span><strong>Butuh bantuan?</strong><p>Hubungi administrator LMA Private Class.</p><a href="mailto:admin@example.com">Hubungi admin ↗</a></div>
-        <div class="user-mini"><div class="avatar" data-profile-initials>AD</div><div><strong data-profile-name>Administrator</strong><small>Administrator</small></div><button class="logout-button" id="logoutBtn" type="button">Keluar</button></div>
+
+        <div class="help-card">
+          <span class="help-icon">✦</span>
+          <strong>Butuh bantuan?</strong>
+          <p>Hubungi administrator LMA Private Class.</p>
+          <a href="mailto:admin@example.com">Hubungi admin ↗</a>
+        </div>
+
+        <div class="user-mini">
+          <div class="avatar" data-profile-initials>AD</div>
+          <div>
+            <strong data-profile-name>Administrator</strong>
+            <small>Administrator</small>
+          </div>
+          <button class="logout-button" id="logoutBtn" type="button">Keluar</button>
+        </div>
+
       </div>
     </aside>
 
-    <main class="main-content" id="dashboard">
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-content">
+
+      <!-- TOPBAR -->
       <header class="topbar">
-        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Buka menu">☰</button>
-        <div class="breadcrumb">Workspace <span>/</span> <strong>Dashboard</strong></div>
+
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Buka menu">
+          ☰
+        </button>
+
+        <div class="breadcrumb">
+          Workspace <span>/</span> <strong id="breadcrumbPage">Dashboard</strong>
+        </div>
+
         <div class="top-actions">
           <span class="today" id="todayLabel"></span>
           <button class="icon-button notification" aria-label="Notifikasi">♧<i></i></button>
           <div class="top-avatar" data-profile-initials>AD</div>
         </div>
+
       </header>
 
-      <section class="page-wrap">
+
+      <!-- =================================
+           HALAMAN DASHBOARD
+      ================================== -->
+      <section class="page-wrap dashboard-page" id="dashboard">
+
         <div class="welcome-row">
-          <div><div class="eyebrow">OVERVIEW</div><h1>Selamat datang, Administrator! <span>✦</span></h1><p>Berikut ringkasan aktivitas LMA Private Class hari ini.</p></div>
-          <button class="primary-button" id="addStudentBtn">＋ Tambah Siswa</button>
+          <div>
+            <div class="eyebrow">OVERVIEW</div>
+            <h1>Selamat datang, Administrator! <span>✦</span></h1>
+            <p>Berikut ringkasan aktivitas LMA Private Class hari ini.</p>
+          </div>
+
+          <button class="primary-button" id="addStudentBtn">
+            ＋ Tambah Siswa
+          </button>
         </div>
 
-        
-<div class="stat-grid">
-  <article class="stat-card">
-    <div class="stat-top">
-      <span>Total Siswa Aktif</span>
-      <span class="stat-icon green">♙</span>
-    </div>
-    <div class="stat-value" id="totalStudents">—</div>
-    <div class="stat-foot">Jumlah siswa dengan status aktif</div>
-  </article>
 
-  <article class="stat-card">
-    <div class="stat-top">
-      <span>Tutor Aktif</span>
-      <span class="stat-icon blue">♧</span>
-    </div>
-    <div class="stat-value" id="totalTutors">—</div>
-    <div class="stat-foot">Jumlah tutor dengan status aktif</div>
-  </article>
+        <!-- STATISTIK -->
+        <div class="stat-grid">
 
-  <article class="stat-card">
-    <div class="stat-top">
-      <span>Jadwal Hari Ini</span>
-      <span class="stat-icon orange">▦</span>
-    </div>
-    <div class="stat-value" id="todaySchedules">—</div>
-    <div class="stat-foot">Total sesi pembelajaran hari ini</div>
-  </article>
-
-  <article class="stat-card">
-    <div class="stat-top">
-      <span>Pendapatan Bulan Ini</span>
-      <span class="stat-icon purple">Rp</span>
-    </div>
-    <div class="stat-value" id="monthlyRevenue">—</div>
-    <div class="stat-foot">Total pembayaran yang diterima bulan ini</div>
-  </article>
-</div>
-
-        <div class="content-grid">
-          <section class="panel revenue-panel">
-            <div class="panel-heading"><div><h2>Ringkasan Pendapatan</h2><p>Performa pemasukan selama 6 bulan terakhir</p></div><select aria-label="Periode grafik"><option>6 Bulan Terakhir</option><option>12 Bulan Terakhir</option></select></div>
-            
-<div class="chart-legend">
-  <span><i class="legend-dot"></i>Pendapatan</span>
-  <strong>Rp 0</strong>
-</div>
-
-            <div class="chart" role="img" aria-label="Grafik ilustrasi pendapatan Januari sampai Juni">
-              <div class="y-labels"><span>15 jt</span><span>10 jt</span><span>5 jt</span><span>0</span></div>
-              <div class="chart-area"><div class="gridline g1"></div><div class="gridline g2"></div><div class="gridline g3"></div><svg viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#35a66a" stop-opacity=".22"/><stop offset="1" stop-color="#35a66a" stop-opacity="0"/></linearGradient></defs><path d="M0 160 C55 150 55 126 120 137 S185 115 240 122 S300 76 360 95 S420 64 480 76 S540 28 600 35 L600 210 L0 210Z" fill="url(#areaFill)"/><path d="M0 160 C55 150 55 126 120 137 S185 115 240 122 S300 76 360 95 S420 64 480 76 S540 28 600 35" fill="none" stroke="#23965a" stroke-width="3" vector-effect="non-scaling-stroke"/></svg><div class="x-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Mei</span><span>Jun</span></div></div>
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Total Siswa Aktif</span>
+              <span class="stat-icon green">♙</span>
             </div>
-            <p class="demo-note" id="dashboardDataNote">Menunggu koneksi database.</p>
+            <div class="stat-value" id="totalStudents">—</div>
+            <div class="stat-foot">Jumlah siswa dengan status aktif</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Tutor Aktif</span>
+              <span class="stat-icon blue">♧</span>
+            </div>
+            <div class="stat-value" id="totalTutors">—</div>
+            <div class="stat-foot">Jumlah tutor dengan status aktif</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Jadwal Hari Ini</span>
+              <span class="stat-icon orange">▦</span>
+            </div>
+            <div class="stat-value" id="todaySchedules">—</div>
+            <div class="stat-foot">Total sesi pembelajaran hari ini</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Pendapatan Bulan Ini</span>
+              <span class="stat-icon purple">Rp</span>
+            </div>
+            <div class="stat-value" id="monthlyRevenue">—</div>
+            <div class="stat-foot">Total pembayaran yang diterima bulan ini</div>
+          </article>
+
+        </div>
+
+
+        <!-- GRAFIK DAN JADWAL -->
+        <div class="content-grid">
+
+          <section class="panel revenue-panel">
+
+            <div class="panel-heading">
+              <div>
+                <h2>Ringkasan Pendapatan</h2>
+                <p>Performa pemasukan selama 6 bulan terakhir</p>
+              </div>
+
+              <select aria-label="Periode grafik">
+                <option>6 Bulan Terakhir</option>
+                <option>12 Bulan Terakhir</option>
+              </select>
+            </div>
+
+            <div class="chart-legend">
+              <span><i class="legend-dot"></i>Pendapatan</span>
+              <strong>Rp 0</strong>
+            </div>
+
+            <div class="chart" role="img" aria-label="Grafik pendapatan enam bulan terakhir">
+
+              <div class="y-labels">
+                <span>15 jt</span>
+                <span>10 jt</span>
+                <span>5 jt</span>
+                <span>0</span>
+              </div>
+
+              <div class="chart-area">
+
+                <div class="gridline g1"></div>
+                <div class="gridline g2"></div>
+                <div class="gridline g3"></div>
+
+                <svg viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#35a66a" stop-opacity=".22"/>
+                      <stop offset="1" stop-color="#35a66a" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+
+                  <path d="M0 180 L600 180 L600 210 L0 210Z" fill="url(#areaFill)"/>
+
+                  <path
+                    d="M0 180 L120 180 L240 180 L360 180 L480 180 L600 180"
+                    fill="none"
+                    stroke="#23965a"
+                    stroke-width="3"
+                    vector-effect="non-scaling-stroke"
+                  />
+                </svg>
+
+                <div class="x-labels">
+                  <span>Jun</span>
+                  <span>Jul</span>
+                  <span>Agu</span>
+                  <span>Sep</span>
+                  <span>Okt</span>
+                  <span>Nov</span>
+                </div>
+
+              </div>
+            </div>
+
+            <p class="demo-note" id="dashboardDataNote">
+              Menunggu koneksi database.
+            </p>
+
           </section>
+
 
           <section class="panel schedule-panel">
-            <div class="panel-heading"><div><h2>Jadwal Hari Ini</h2><p id="scheduleDateLabel">Memuat tanggal...</p></div><a class="text-link" href="#schedules">Lihat semua →</a></div>
-            <div class="schedule-list" id="scheduleList"><div class="empty-state">Memuat jadwal pembelajaran...</div></div>
 
-        <div class="bottom-grid">
-          <section class="panel">
-            <div class="panel-heading"><div><h2>Aktivitas Terbaru</h2><p>Aktivitas operasional terakhir</p></div><a class="text-link" href="#reports">Lihat semua →</a></div>
-            <div class="table-wrap"><table><thead><tr><th>Nama</th><th>Aktivitas</th><th>Waktu</th><th>Status</th></tr></thead><tbody>
-<tbody>
-  <tr>
-    <td colspan="4" style="text-align:center;padding:24px;color:#87958d;">
-      Belum ada aktivitas yang tercatat.
-    </td>
-  </tr>
-</tbody>
+            <div class="panel-heading">
+              <div>
+                <h2>Jadwal Hari Ini</h2>
+                <p id="scheduleDateLabel">Memuat tanggal...</p>
+              </div>
 
-            </tbody></table></div>
+              <a class="text-link" href="#schedules">Lihat semua →</a>
+            </div>
+
+            <div class="schedule-list" id="scheduleList">
+              <div class="empty-state">Memuat jadwal pembelajaran...</div>
+            </div>
+
           </section>
+
+        </div>
+
+
+        <!-- AKTIVITAS DAN AKSES CEPAT -->
+        <div class="bottom-grid">
+
+          <section class="panel">
+
+            <div class="panel-heading">
+              <div>
+                <h2>Aktivitas Terbaru</h2>
+                <p>Aktivitas operasional terakhir</p>
+              </div>
+              <a class="text-link" href="#reports">Lihat semua →</a>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>Aktivitas</th>
+                    <th>Waktu</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td colspan="4" style="text-align:center;padding:24px;color:#87958d;">
+                      Belum ada aktivitas yang tercatat.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </section>
+
+
           <section class="panel quick-panel">
-            <div class="panel-heading"><div><h2>Akses Cepat</h2><p>Menu yang sering digunakan</p></div></div>
+
+            <div class="panel-heading">
+              <div>
+                <h2>Akses Cepat</h2>
+                <p>Menu yang sering digunakan</p>
+              </div>
+            </div>
+
             <div class="quick-actions">
-              <button data-action="Tambah siswa" class="quick-action"><span class="quick-icon green">＋</span><span><strong>Tambah Siswa</strong><small>Daftarkan siswa baru</small></span><b>→</b></button>
-              <button data-action="Tambah tutor" class="quick-action"><span class="quick-icon blue">♧</span><span><strong>Tambah Tutor</strong><small>Tambahkan pengajar</small></span><b>→</b></button>
-              <button data-action="Buat jadwal" class="quick-action"><span class="quick-icon orange">▦</span><span><strong>Buat Jadwal</strong><small>Atur sesi pembelajaran</small></span><b>→</b></button>
-              <button data-action="Buat tagihan" class="quick-action"><span class="quick-icon purple">Rp</span><span><strong>Buat Tagihan</strong><small>Catat tagihan siswa</small></span><b>→</b></button>
+
+              <button data-action="Tambah siswa" class="quick-action">
+                <span class="quick-icon green">＋</span>
+                <span>
+                  <strong>Tambah Siswa</strong>
+                  <small>Daftarkan siswa baru</small>
+                </span>
+                <b>→</b>
+              </button>
+
+              <button data-action="Tambah tutor" class="quick-action">
+                <span class="quick-icon blue">♧</span>
+                <span>
+                  <strong>Tambah Tutor</strong>
+                  <small>Tambahkan pengajar</small>
+                </span>
+                <b>→</b>
+              </button>
+
+              <button data-action="Buat jadwal" class="quick-action">
+                <span class="quick-icon orange">▦</span>
+                <span>
+                  <strong>Buat Jadwal</strong>
+                  <small>Atur sesi pembelajaran</small>
+                </span>
+                <b>→</b>
+              </button>
+
+              <button data-action="Buat tagihan" class="quick-action">
+                <span class="quick-icon purple">Rp</span>
+                <span>
+                  <strong>Buat Tagihan</strong>
+                  <small>Catat tagihan siswa</small>
+                </span>
+                <b>→</b>
+              </button>
+
             </div>
           </section>
+
         </div>
-        <footer class="footer">© 2026 <strong>LMA Private Class</strong>. Sistem Manajemen Les Privat.</footer>
+
+        <footer class="footer">
+          © 2026 <strong>LMA Private Class</strong>. Sistem Manajemen Les Privat.
+        </footer>
+
       </section>
+
+
+      <!-- =================================
+           HALAMAN DATA SISWA
+      ================================== -->
+      <section class="page-wrap module-page" id="students">
+
+        <div class="module-toolbar">
+
+          <div>
+            <div class="eyebrow">MANAJEMEN SISWA</div>
+            <h1>Data Siswa</h1>
+            <p>Kelola seluruh data siswa LMA Private Class.</p>
+          </div>
+
+          <button class="primary-button" id="openStudentModal">
+            ＋ Tambah Siswa
+          </button>
+
+        </div>
+
+
+        <!-- RINGKASAN SISWA -->
+        <div class="student-summary">
+
+          <div class="student-summary-card">
+            <span>Total Siswa</span>
+            <strong id="studentCountAll">0</strong>
+          </div>
+
+          <div class="student-summary-card">
+            <span>Siswa Aktif</span>
+            <strong id="studentCountActive">0</strong>
+          </div>
+
+          <div class="student-summary-card">
+            <span>Siswa Tidak Aktif / Lulus</span>
+            <strong id="studentCountOther">0</strong>
+          </div>
+
+        </div>
+
+
+        <!-- DAFTAR SISWA -->
+        <section class="student-panel">
+
+          <div class="panel-heading">
+            <div>
+              <h2>Daftar Siswa</h2>
+              <p>Data siswa yang tersimpan di database.</p>
+            </div>
+          </div>
+
+          <div class="student-filters">
+
+            <div class="student-search">
+              <input
+                type="search"
+                id="studentSearch"
+                placeholder="Cari nama atau kode siswa..."
+              >
+            </div>
+
+            <select id="studentStatusFilter" aria-label="Filter status siswa">
+              <option value="">Semua Status</option>
+              <option value="active">Aktif</option>
+              <option value="inactive">Tidak Aktif</option>
+              <option value="graduated">Lulus</option>
+            </select>
+
+          </div>
+
+
+          <div class="student-table-wrap">
+
+            <table class="student-table">
+
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>SISWA</th>
+                  <th>JENIS KELAMIN</th>
+                  <th>JENJANG</th>
+                  <th>SEKOLAH</th>
+                  <th>STATUS</th>
+                  <th>AKSI</th>
+                </tr>
+              </thead>
+
+              <tbody id="studentsTableBody">
+                <tr>
+                  <td colspan="7" style="text-align:center;padding:25px;">
+                    Memuat data siswa...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <p class="demo-note" id="studentDataNote">
+            Menunggu koneksi database.
+          </p>
+
+        </section>
+
+      </section>
+
+
+      <!-- =================================
+           MODAL TAMBAH / EDIT SISWA
+      ================================== -->
+      <div class="student-modal" id="studentModal">
+
+        <div class="student-modal-content">
+
+          <div class="student-modal-header">
+            <h2 id="studentModalTitle">Tambah Siswa Baru</h2>
+
+            <button
+              type="button"
+              class="student-modal-close"
+              id="closeStudentModal"
+              aria-label="Tutup"
+            >×</button>
+          </div>
+
+
+          <form id="studentForm" class="student-form">
+
+            <input type="hidden" id="studentId">
+
+            <div class="student-form-grid">
+
+              <div>
+                <label for="studentCode">Kode Siswa *</label>
+                <input
+                  type="text"
+                  id="studentCode"
+                  placeholder="Contoh: LMA001"
+                  required
+                >
+              </div>
+
+              <div>
+                <label for="studentName">Nama Lengkap *</label>
+                <input
+                  type="text"
+                  id="studentName"
+                  placeholder="Nama lengkap siswa"
+                  required
+                >
+              </div>
+
+              <div>
+                <label for="studentGender">Jenis Kelamin</label>
+                <select id="studentGender">
+                  <option value="">Pilih jenis kelamin</option>
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="studentBirthDate">Tanggal Lahir</label>
+                <input type="date" id="studentBirthDate">
+              </div>
+
+              <div>
+                <label for="studentEducation">Jenjang Pendidikan</label>
+                <select id="studentEducation">
+                  <option value="">Pilih jenjang</option>
+                  <option value="PAUD">PAUD</option>
+                  <option value="TK">TK</option>
+                  <option value="SD">SD</option>
+                  <option value="SMP">SMP</option>
+                  <option value="SMA">SMA</option>
+                  <option value="SMK">SMK</option>
+                  <option value="Perguruan Tinggi">Perguruan Tinggi</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="studentSchool">Nama Sekolah</label>
+                <input
+                  type="text"
+                  id="studentSchool"
+                  placeholder="Nama sekolah siswa"
+                >
+              </div>
+
+              <div class="full-width">
+                <label for="studentAddress">Alamat</label>
+                <textarea
+                  id="studentAddress"
+                  placeholder="Alamat tempat tinggal siswa"
+                ></textarea>
+              </div>
+
+              <div>
+                <label for="studentStatus">Status Siswa</label>
+                <select id="studentStatus">
+                  <option value="active">Aktif</option>
+                  <option value="inactive">Tidak Aktif</option>
+                  <option value="graduated">Lulus</option>
+                </select>
+              </div>
+
+              <div class="full-width">
+                <label for="studentNotes">Catatan</label>
+                <textarea
+                  id="studentNotes"
+                  placeholder="Catatan tambahan (opsional)"
+                ></textarea>
+              </div>
+
+            </div>
+
+
+            <div class="student-form-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancelStudentForm"
+              >
+                Batal
+              </button>
+
+              <button
+                type="submit"
+                class="primary-button"
+                id="saveStudentBtn"
+              >
+                Simpan Siswa
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+
     </main>
   </div>
+
+
+  <!-- NOTIFIKASI -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- JAVASCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/supabase-config.js"></script>
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/app.js"></script>
+
 </body>
 </html>
