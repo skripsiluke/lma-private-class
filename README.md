@@ -1,24 +1,18 @@
 # LMA Private Class
 
-Sistem manajemen bisnis les privat untuk layanan tatap muka di rumah dan pembelajaran online.
+Dashboard manajemen bisnis les privat dengan GitHub Pages dan Supabase.
 
-## Status
-Tahap 1 — fondasi antarmuka dashboard (data masih berupa contoh/dummy).
+## Konfigurasi Supabase
+1. Buka `assets/js/supabase-config.js`.
+2. Ganti `TEMPEL_PUBLISHABLE_KEY_DI_SINI` dengan Supabase Publishable Key dari project Singapore.
+3. Project URL sudah diisi berdasarkan project `lma-private-class1`.
+4. Jangan pernah memasukkan Secret Key / service_role key ke frontend.
 
-## Menjalankan secara lokal
-Buka `index.html` di browser. Untuk pengembangan lanjutan, disarankan memakai ekstensi Live Server di Visual Studio Code.
+## Deploy GitHub Pages
+Upload isi folder ini ke branch `main` pada repository dan aktifkan Pages dari `/(root)`.
 
-## Struktur
-- `index.html` — dashboard awal
-- `assets/css/style.css` — tampilan responsif
-- `assets/js/app.js` — interaksi dasar
-- `supabase/` — disiapkan untuk skema database dan kebijakan keamanan pada tahap integrasi
+## Login
+Gunakan akun administrator yang dibuat di Supabase Authentication. Profil harus memiliki `role = admin` dan `is_active = true`.
 
-## Catatan keamanan
-Jangan pernah menyimpan Supabase service role key, password, atau secret lain di frontend maupun repository. Integrasi database berikutnya akan menggunakan publishable/anon key dengan Row Level Security (RLS) yang benar.
-
-## Tahap berikutnya
-1. Membuat proyek Supabase.
-2. Menyusun skema PostgreSQL dan RLS.
-3. Mengaktifkan autentikasi dan peran pengguna.
-4. Mengganti data contoh dengan data database.
+## Dashboard tahap awal
+Login administrator, total siswa aktif, tutor aktif, jadwal hari ini, dan total pembayaran bulan berjalan dibaca dari Supabase. Modul CRUD akan dikembangkan bertahap.
