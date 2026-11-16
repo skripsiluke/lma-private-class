@@ -123,6 +123,54 @@
   </header>
 
   <div id="message">Memeriksa sesi login...</div>
+  
+<section id="setPasswordView" hidden style="
+  max-width: 440px;
+  margin: 50px auto;
+  padding: 28px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 3px 15px #00000012;
+">
+  <h2 style="color:#176b45;">Buat Password Tutor</h2>
+  <p style="color:#718078;font-size:14px;">
+    Selamat bergabung di LMA Private Class.
+    Silakan buat password untuk akun tutor Anda.
+  </p>
+
+  <form id="setPasswordForm">
+    <label>Password Baru</label>
+    <input
+      type="password"
+      id="newPassword"
+      minlength="8"
+      required
+      placeholder="Minimal 8 karakter"
+      style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px;"
+    >
+
+    <label>Konfirmasi Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      minlength="8"
+      required
+      placeholder="Ulangi password"
+      style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px;"
+    >
+
+    <button type="submit" style="
+      width:100%;
+      padding:13px;
+      background:#176b45;
+      color:white;
+      border-radius:8px;
+    ">Simpan Password</button>
+  </form>
+
+  <p id="passwordMessage" style="font-size:14px;"></p>
+</section>
+
 
   <main id="dashboard" hidden>
     <section class="welcome">
