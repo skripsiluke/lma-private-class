@@ -1,1 +1,341 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Tutor | LMA Private Class</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6f4;
+      color: #25352c;
+    }
+    .header {
+      background: #176b45;
+      color: white;
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+    .brand { font-size: 19px; font-weight: bold; }
+    .brand small {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      margin-top: 5px;
+      opacity: .85;
+    }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .logout { background: white; color: #176b45; }
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .welcome {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 3px 12px #00000008;
+    }
+    .welcome h1 { margin: 0 0 8px; font-size: 25px; }
+    .muted { color: #718078; font-size: 14px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 3px 12px #00000008;
+    }
+    .card .number {
+      font-size: 30px;
+      font-weight: bold;
+      color: #176b45;
+      margin-top: 10px;
+    }
+    .section {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px #00000008;
+      margin-bottom: 20px;
+    }
+    .section h2 { margin-top: 0; font-size: 19px; }
+    .schedule {
+      border: 1px solid #e5ece7;
+      border-left: 4px solid #269b65;
+      border-radius: 9px;
+      padding: 15px;
+      margin-top: 12px;
+    }
+    .schedule strong { display: block; margin-bottom: 7px; }
+    .schedule p { margin: 5px 0; font-size: 14px; color: #64736a; }
+    .empty {
+      padding: 25px;
+      text-align: center;
+      color: #718078;
+      background: #f7faf8;
+      border-radius: 9px;
+      margin-top: 12px;
+    }
+    #message {
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      margin: 20px;
+      color: #52645a;
+    }
+    .error { color: #b42318 !important; }
+    [hidden] { display: none !important; }
+    @media(max-width: 600px) {
+      .header { padding: 16px; }
+      main { margin-top: 20px; padding: 0 14px; }
+      .welcome h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="brand">
+      LMA PRIVATE CLASS
+      <small>Portal Dashboard Tutor</small>
+    </div>
+    <button class="logout" id="logoutBtn" hidden>Keluar</button>
+  </header>
+
+  <div id="message">Memeriksa sesi login...</div>
+
+  <main id="dashboard" hidden>
+    <section class="welcome">
+      <h1>Selamat Datang, <span id="tutorName">Tutor</span>!</h1>
+      <p class="muted">Selamat bekerja dan mengajar bersama LMA Private Class.</p>
+      <p><strong>Kode Tutor:</strong> <span id="tutorCode">-</span></p>
+      <p><strong>Spesialisasi:</strong> <span id="specialization">-</span></p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <div class="muted">Total Jadwal</div>
+        <div class="number" id="totalSchedules">0</div>
+      </div>
+      <div class="card">
+        <div class="muted">Jadwal Hari Ini</div>
+        <div class="number" id="todaySchedules">0</div>
+      </div>
+      <div class="card">
+        <div class="muted">Jadwal Selesai</div>
+        <div class="number" id="completedSchedules">0</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Jadwal Mengajar Saya</h2>
+      <p class="muted">Daftar jadwal mengajar yang ditugaskan kepada Anda.</p>
+      <div id="scheduleList">
+        <div class="empty">Memuat jadwal...</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+
+  <script>
+  (() => {
+    const message = document.getElementById('message');
+    const dashboard = document.getElementById('dashboard');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (!window.supabase ||
+        !window.LMA_SUPABASE_URL ||
+        !window.LMA_SUPABASE_PUBLISHABLE_KEY) {
+      message.textContent = 'Konfigurasi Supabase belum lengkap.';
+      return;
+    }
+
+    const client = window.supabase.createClient(
+      window.LMA_SUPABASE_URL,
+      window.LMA_SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const today = new Date();
+    const todayString = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, '0'),
+      String(today.getDate()).padStart(2, '0')
+    ].join('-');
+
+    function showMessage(text, isError = false) {
+      message.hidden = false;
+      message.textContent = text;
+      message.className = isError ? 'error' : '';
+    }
+
+    async function loadDashboard(session) {
+      if (!session) {
+        dashboard.hidden = true;
+        logoutBtn.hidden = true;
+        showMessage('Silakan login terlebih dahulu.', true);
+        return;
+      }
+
+      showMessage('Memeriksa hak akses akun...');
+
+      const { data: profile, error: profileError } = await client
+        .from('profiles')
+        .select('full_name, role, is_active')
+        .eq('id', session.user.id)
+        .single();
+
+      if (profileError || !profile ||
+          profile.role !== 'tutor' || profile.is_active !== true) {
+        await client.auth.signOut();
+        showMessage(
+          'Akses ditolak. Halaman ini hanya untuk akun tutor aktif.',
+          true
+        );
+        return;
+      }
+
+      const { data: tutor, error: tutorError } = await client
+        .from('tutors')
+        .select('id, tutor_code, full_name, specialization')
+        .eq('profile_id', session.user.id)
+        .single();
+
+      if (tutorError || !tutor) {
+        showMessage(
+          'Data tutor belum dapat diakses. Silakan hubungi administrator.',
+          true
+        );
+        return;
+      }
+
+      document.getElementById('tutorName').textContent =
+        tutor.full_name || profile.full_name || 'Tutor';
+      document.getElementById('tutorCode').textContent =
+        tutor.tutor_code || '-';
+      document.getElementById('specialization').textContent =
+        tutor.specialization || '-';
+
+      dashboard.hidden = false;
+      logoutBtn.hidden = false;
+      message.hidden = true;
+
+      await loadSchedules(tutor.id);
+    }
+
+    async function loadSchedules(tutorId) {
+      const list = document.getElementById('scheduleList');
+      list.innerHTML = '<div class="empty">Memuat jadwal...</div>';
+
+      const { data, error } = await client
+        .from('schedules')
+        .select(`
+          id, lesson_date, start_time, end_time,
+          learning_mode, location, meeting_url, status,
+          students(full_name),
+          subjects(subject_name)
+        `)
+        .eq('tutor_id', tutorId)
+        .order('lesson_date', { ascending: true });
+
+      if (error) {
+        list.innerHTML =
+          '<div class="empty error">Jadwal belum dapat dimuat. Periksa izin akses database.</div>';
+        return;
+      }
+
+      const schedules = data || [];
+      const todaySchedules = schedules.filter(
+        item => item.lesson_date === todayString
+      );
+      const completed = schedules.filter(
+        item => item.status === 'completed'
+      );
+
+      document.getElementById('totalSchedules').textContent =
+        schedules.length;
+      document.getElementById('todaySchedules').textContent =
+        todaySchedules.length;
+      document.getElementById('completedSchedules').textContent =
+        completed.length;
+
+      if (!schedules.length) {
+        list.innerHTML =
+          '<div class="empty">Belum ada jadwal mengajar yang ditugaskan.</div>';
+        return;
+      }
+
+      list.innerHTML = schedules.map(item => {
+        const student = item.students?.full_name || 'Siswa';
+        const subject = item.subjects?.subject_name || 'Mata Pelajaran';
+        const date = new Date(item.lesson_date + 'T00:00:00')
+          .toLocaleDateString('id-ID', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+
+        const status = {
+          scheduled: 'Terjadwal',
+          completed: 'Selesai',
+          cancelled: 'Dibatalkan'
+        }[item.status] || item.status || '-';
+
+        const location = item.learning_mode === 'online'
+          ? 'Online'
+          : (item.location || 'Lokasi belum ditentukan');
+
+        return `
+          <div class="schedule">
+            <strong>${student} — ${subject}</strong>
+            <p>📅 ${date}</p>
+            <p>🕒 ${String(item.start_time).slice(0,5)} – ${String(item.end_time).slice(0,5)}</p>
+            <p>📍 ${location}</p>
+            <p>Status: ${status}</p>
+            ${item.meeting_url
+              ? `<p><a href="${item.meeting_url}" target="_blank" rel="noopener">Buka Link Pertemuan</a></p>`
+              : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    logoutBtn.addEventListener('click', async () => {
+      await client.auth.signOut();
+      window.location.href = 'index.html';
+    });
+
+    client.auth.onAuthStateChange((_event, session) => {
+      setTimeout(() => loadDashboard(session), 0);
+    });
+
+    client.auth.getSession().then(({ data }) => {
+      loadDashboard(data.session);
+    });
+  })();
+  </script>
+</body>
+</html>
+
